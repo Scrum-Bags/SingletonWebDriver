@@ -1,50 +1,21 @@
+from selenium.webdriver.remote.webdriver import WebDriver
+
+
 class SingletonWebDriver:
 
     _instance = None
 
-    driverPath = path.join(
-        "C:\\"
-        "Program Files",
-        "Selenium",
-        "WebDrivers"
-    )
-
     def __new__(
         cls, 
-        driverObj: Union[WebDriver, str, None] = None,
+        driverObj: Union[WebDriver, None] = None,
         **kwargs
     ):
         if cls._instance is None:
-            if driverObj == 'Chrome':
-                cls._instance = webdriver.Chrome(
-                    service=ChromeService(
-                        executable_path=path.join(
-                            cls.driverPath,
-                            "chromedriver.exe"
-                        )
-                    ),
-                    **kwargs
-                )
-            elif driverObj == 'Edge':
-                cls._instance = webdriver.Edge(
-                    service=EdgeService(
-                        executable_path=path.join(
-                            cls.driverPath,
-                            "msedgedriver.exe"
-                        )
-                    ),
-                    **kwargs
-                )
-            elif driverObj is None or driverObj == Firefox:
-                cls._instance = webdriver.Firefox(
-                    service=FirefoxService(
-                        executable_path=path.join(
-                            cls.driverPath,
-                            "geckodriver.exe"
-                        )
-                    ),
-                    **kwargs
-                )
+            if driverObj is None:
+                raise ValueError("Need initializing webdriver object")
+                return None
             else:
                 cls._instance = driverObj
+        elif driverObj is not None:
+            raise ValueError("Singleton Web Driver already initialized!")
         return cls._instance
