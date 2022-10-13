@@ -1,5 +1,4 @@
-from setuptools import setup
-from setuptools import find_packages
+from distutils.core import setup
 
 setup(
     name='singleton_web_driver',
@@ -7,11 +6,9 @@ setup(
     author="Doug Walter",
     author_email="doug.walter@smoothstack.com",
     license="Apache 2.0",
-    packages=find_packages(
-        include=[
-            'singleton_web_driver.*'
-        ]
-    ),
+    packages=[
+        'singleton_web_driver'
+    ],
     install_requires=[
         'selenium'
     ]
